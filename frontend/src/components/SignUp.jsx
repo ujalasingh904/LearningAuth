@@ -73,7 +73,7 @@ const SignUp = () => {
           <span className='text-blue-500'>Sign in</span>
         </Link>
       </div>
-      <p className='text-red-500 mt-5'>{error && 'Something Went Wrong'}</p>
+      <p className='text-red-500 mt-5'>{error && ' Username or Email already in use'}</p>
     </div>
   )
 }
