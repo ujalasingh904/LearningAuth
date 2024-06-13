@@ -1,9 +1,7 @@
 import { User } from "../models/User.model.js";
 import bcryptjs from "bcryptjs"
 import { errorHandler } from "../utils/error.utils.js";
-import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
-dotenv.config();
+import jwt from 'jsonwebtoken' 
 
 export const signup = async (req, res, next) => {
 
@@ -22,7 +20,7 @@ export const signup = async (req, res, next) => {
 export const signin = async (req, res, next) => {
     const { email, password } = req.body;
     try {
-        const validUser = User.findOne({ email })
+        const validUser = await User.findOne({ email })
         if (!validUser)
             return next(errorHandler(404, 'Invalid credentials'))
 

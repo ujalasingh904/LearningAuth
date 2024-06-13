@@ -1,13 +1,14 @@
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import axios from 'axios'
+import { Link , useNavigate} from 'react-router-dom'
+import { useState } from 'react' 
 
 const SignUp = () => {
 
   const [formData, setformData] = useState({})
   const [loading, setloading] = useState(false)
   const [error, setError] = useState(false)
+  const navigate = useNavigate()
   const handleChange = (e) => {
+    setError(false)
     setformData({ ...formData, [e.target.id]: e.target.value })
 
   }
@@ -22,7 +23,7 @@ const SignUp = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
-      });
+      }); 
       const data = await res.json();
       console.log(data);
       setloading(false)
@@ -31,9 +32,11 @@ const SignUp = () => {
         setError(true)
         return
       }
+      navigate('/')
     } catch (error) {
-      console.log(error)
+      setloading(false)
       setError(true)
+
     }
   }
   return (
@@ -68,7 +71,7 @@ const SignUp = () => {
         </button>
       </form>
       <div className='flex gap-2 mt-5'>
-        <p>Have an account?</p>
+        <p>Already have an account?</p>
         <Link to='/sign-in'>
           <span className='text-blue-500'>Sign in</span>
         </Link>
