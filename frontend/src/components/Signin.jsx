@@ -1,7 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { signInStart, signInFailure, singInSuccess ,changeError } from '../redux/user/userSlice.js'
+import { signInStart, signInFailure, singInSuccess, changeError } from '../redux/user/userSlice.js'
 import { useDispatch, useSelector } from 'react-redux'
+import OAuth from "./OAuth.jsx"
 
 const Signin = () => {
 
@@ -34,6 +35,7 @@ const Signin = () => {
 
       if (data.success == false) {
         // setError(true) 
+        console.log(data);
         dispatch(signInFailure(data))
         return
       }
@@ -45,7 +47,7 @@ const Signin = () => {
       // setloading(false)
       // setError(true)
       console.error(error)
-      dispatch(signInFailure(error))  
+      dispatch(signInFailure(error))
     }
   }
   return (
@@ -60,6 +62,7 @@ const Signin = () => {
           id='email'
           className='bg-slate-100 p-3 rounded-lg'
           onChange={handleChange}
+          required={true}
         />
         <input
           type='password'
@@ -67,11 +70,13 @@ const Signin = () => {
           id='password'
           className='bg-slate-100 p-3 rounded-lg'
           onChange={handleChange}
+          required={true}
         />
         <button disabled={loading}
           className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
           {loading ? 'loading...' : 'sign in'}
         </button>
+        <OAuth />
       </form>
       <div className='flex gap-2 mt-5'>
         <p>Dont  have  an account?</p>

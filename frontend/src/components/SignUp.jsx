@@ -1,5 +1,6 @@
-import { Link , useNavigate} from 'react-router-dom'
-import { useState } from 'react' 
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import OAuth from './OAuth'
 
 const SignUp = () => {
 
@@ -23,7 +24,7 @@ const SignUp = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
-      }); 
+      });
       const data = await res.json();
       console.log(data);
       setloading(false)
@@ -50,6 +51,7 @@ const SignUp = () => {
           id='username'
           className='bg-slate-100 p-3 rounded-lg'
           onChange={handleChange}
+          required={true}
         />
         <input
           type='email'
@@ -57,6 +59,7 @@ const SignUp = () => {
           id='email'
           className='bg-slate-100 p-3 rounded-lg'
           onChange={handleChange}
+          required={true}
         />
         <input
           type='password'
@@ -64,11 +67,14 @@ const SignUp = () => {
           id='password'
           className='bg-slate-100 p-3 rounded-lg'
           onChange={handleChange}
+          required={true}
         />
         <button disabled={loading}
           className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
           {loading ? 'loading...' : 'sign up'}
         </button>
+
+        <OAuth />
       </form>
       <div className='flex gap-2 mt-5'>
         <p>Already have an account?</p>
