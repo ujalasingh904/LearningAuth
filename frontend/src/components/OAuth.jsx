@@ -8,11 +8,13 @@ const OAuth = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleGoogleClick = async () => {
     try {
       const provider = new GoogleAuthProvider();
       const auth = getAuth(app)
       const result = await signInWithPopup(auth, provider)
+      console.log(result.user.displayName)
 
       const res = await fetch('/api/auth/google', {
         method: 'POST',
@@ -20,13 +22,17 @@ const OAuth = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: result.user.displayName,
+          name: result.user.displayName,
           email: result.user.email,
-          profilePicture: result.user.photoURL,
+          photo: result.user.photoURL,
         }),
-      }); 
+      });
 
       const data = await res.json();
+      // if(data.success == false) {
+      //   alert("Failed to login. Please try again later.");
+      //   return;
+      // }
       console.log(data)
       dispatch(singInSuccess(data))
       navigate('/')

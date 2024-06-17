@@ -4,8 +4,8 @@ import { verifyToken } from "../utils/verifyUser.js";
 
 const router = Router();
 
-router.get('/', test)
+router.get('/', test); 
 router.post('/update/:id', verifyToken, updateUser);
-router.post('/delete/:id', verifyToken, deleteUser);
+router.delete('/delete/:id', verifyToken, deleteUser); 
 
 export default router

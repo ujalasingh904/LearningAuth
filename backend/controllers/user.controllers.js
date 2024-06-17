@@ -3,10 +3,9 @@ import bcryptjs from "bcryptjs"
 import { User } from '../models/User.model.js'
 
 export const test = (req, res) => {
-    res.json({
-        message: "hi there"
-    })
-};
+    res.send("Hello World")
+
+}
 
 export const updateUser = async (req, res, next) => {
     if (req.user.id !== req.params.id) {
@@ -42,12 +41,11 @@ export const deleteUser = async (req, res, next) => {
     if (req.user.id !== req.params.id)
         return next(errorHandler(401, 'you can delete only your account'))
     try {
-        
+
         await User.findByIdAndDelete(req.params.id)
         res.status(200).json('User deleted successfully')
     } catch (error) {
         next(error)
     }
-
 
 }
