@@ -4,7 +4,7 @@ import dotenv from "dotenv"
 import userRoutes from "./routes/user.route.js"
 import authRoutes from "./routes/auth.route.js" 
 import cookieParser from "cookie-parser"; 
-import path from 'path';
+// import path from 'path';
 
 dotenv.config()
 
@@ -15,14 +15,14 @@ mongoose
    })
    .catch((err) => console.log(err))
    
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
-const app = express()
+const app = express() 
 
-app.use(express.static(path.join(__dirname, '/frontend/dist')));
-app.get('*', (req, res) => {
-   res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
- });
+// app.use(express.static(path.join(__dirname, '/frontend/dist')));
+// app.get('*', (req, res) => {
+//    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+//  });
 
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`listening on port:`, port))
